@@ -6,7 +6,10 @@ class Form extends Component {
         super(props);
 
         this.state = {
-            fullname: ' '
+            fullname: ' ',
+            email: '',
+            address: ' '
+            
         }
     
     this.changeHandler=this.changeHandler.bind(this);
@@ -15,14 +18,20 @@ class Form extends Component {
 
     changeHandler(e){
        
-        this.setState({fullname: e.target.value});
+        this.setState(
+            {[e.target.name]: e.target.value});
 
      }
 
      　SubmitHandler(e){
         e.preventDefault();
          alert(`you just submit ${this.state.fullname}`);
-         this.setState({fullname: ' '});
+        // e.persist();
+         console.log(e.target);
+        
+         this.setState(state=>{
+           return Object.keys(state).reduce((accu,item)=>({...accu, [item]:" "}), {})
+         });
      }
 
 
@@ -30,7 +39,10 @@ class Form extends Component {
         return (
             <div>
                 <form onSubmit={this.SubmitHandler}>
-                    <input type="text" value={this.state.fullname} onChange={this.changeHandler} />
+                    <lab htmlFor="fullname">Full Name:</lab>
+                    <input type="text" name='fullname' value={this.state.fullname} onChange={this.changeHandler} />
+                    <input type="email" name='email' value={this.state.email} onChange={this.changeHandler} />
+                    <input type="address" name='address' value={this.state.address} onChange={this.changeHandler} />
                     <button type="submit" >Submit</button>
                 </form>
             </div>
