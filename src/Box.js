@@ -10,8 +10,10 @@ constructor(props){
 }
 
     clickHandler(){
+        console.log("deleting");
 
-    this.props.deleteBox();
+    this.props.deleteBox(this.props.id);
+    console.log(this.props.id);
 
     }
 
